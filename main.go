@@ -10,6 +10,8 @@ var ss = []string{
 	"fooooooooooooooooooooo",
 	"baaaaaaaaaaaaaaaaaaaar",
 	"baaaaaaaaaaaaaaaaaaaaz",
+	"zooooooooooooooooooooo",
+	"ohoooooooooooooooooooo",
 }
 
 const N = 10000000

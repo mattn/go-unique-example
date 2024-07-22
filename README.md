@@ -1,8 +1,8 @@
 # go-unique-example
 
 ```
-2024/07/22 13:14:18 test_without_unique_package: 14960 allocated
-2024/07/22 13:14:19 test_with_unique_package: 6160 allocated
+2024/07/22 13:24:50 test_without_unique_package: 15072 allocated
+2024/07/22 13:24:50 test_with_unique_package: 6576 allocated
 ```
 
 ## License
