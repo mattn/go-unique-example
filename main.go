@@ -1,14 +1,45 @@
 package main
 
 import (
-	"fmt"
+	"log"
+	"runtime"
 	"unique"
 )
 
+var ss = []string{
+	"fooooooooooooooooooooo",
+	"baaaaaaaaaaaaaaaaaaaar",
+	"baaaaaaaaaaaaaaaaaaaaz",
+}
+
+const N = 10000000
+
+func getAlloc() uint64 {
+	var m runtime.MemStats
+	runtime.GC()
+	runtime.ReadMemStats(&m)
+	return m.Alloc
+}
+
+func test1() {
+	before := getAlloc()
+	a := make([]string, N)
+	for i := 0; i < len(a); i++ {
+		a[i] = ss[i%len(ss)]
+	}
+	log.Printf("test1: %v allocated", getAlloc()-before)
+}
+
+func test2() {
+	before := getAlloc()
+	a := make([]unique.Handle[string], N)
+	for i := 0; i < len(a); i++ {
+		a[i] = unique.Make(ss[i%len(ss)])
+	}
+	log.Printf("test2: %v allocated", getAlloc()-before)
+}
+
 func main() {
-	a := [6]int{2, 1, 4, 3}
-	b := unique.Make(a).Value()
-	fmt.Println(a == b) // true
-	a[0] = 3
-	fmt.Println(a == b) // false
+	test1()
+	test2()
 }
