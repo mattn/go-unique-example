@@ -21,25 +21,26 @@ func getAlloc() uint64 {
 	return m.Alloc
 }
 
-func test1() {
+func test_without_unique_package() {
 	before := getAlloc()
 	a := make([]string, N)
 	for i := 0; i < len(a); i++ {
 		a[i] = ss[i%len(ss)]
 	}
-	log.Printf("test1: %v allocated", getAlloc()-before)
+	log.Printf("test_without_unique_package: %v allocated", getAlloc()-before)
 }
 
-func test2() {
+func test_with_unique_package() {
 	before := getAlloc()
 	a := make([]unique.Handle[string], N)
 	for i := 0; i < len(a); i++ {
 		a[i] = unique.Make(ss[i%len(ss)])
 	}
-	log.Printf("test2: %v allocated", getAlloc()-before)
+	log.Printf("test_with_unique_package: %v allocated", getAlloc()-before)
 }
 
 func main() {
-	test1()
-	test2()
+	test_without_unique_package()
+	runtime.GC()
+	test_with_unique_package()
 }
