@@ -30,6 +30,7 @@ func test_without_unique_package() {
 		a[i] = ss[i%len(ss)]
 	}
 	log.Printf("test_without_unique_package: %v allocated", getAlloc()-before)
+	runtime.KeepAlive(a)
 }
 
 func test_with_unique_package() {
@@ -39,6 +40,7 @@ func test_with_unique_package() {
 		a[i] = unique.Make(ss[i%len(ss)])
 	}
 	log.Printf("test_with_unique_package: %v allocated", getAlloc()-before)
+	runtime.KeepAlive(a)
 }
 
 func main() {
